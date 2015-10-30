@@ -1,0 +1,42 @@
+md-content(layout='row')
+      span(flex='')
+      md-whiteframe(layout='column', flex='50')
+        Center  Welcome to E-Timesheet Management System
+        div(layout='row', layout-align='space-around center')
+          div Register
+          md-button Twitter
+          md-button Facebook
+        .md-warn(ng-show='error')
+          small {{ error }}
+        form(ng-submit='save()', name='form', novalidate='', layout-padding='')
+          div(layout='row', layout-align='space-around left') 
+            div Name
+            md-input-container
+              input(type='text', ng-model='newEmployee.Fname',placeholder='First Name', aria-label='Fname')
+            md-input-container
+              input(type='text', ng-model='newEmployee.Mname',placeholder='Middle Name', aria-label='Mname')
+            md-input-container
+              input(type='text', ng-model='newEmployee.Lname',placeholder='Last Name', aria-label='Lname')
+          div(layout='row', layout-align='space-around left') 
+            div Contact
+            md-input-container
+              input(type='number', ng-model='newEmployee.personalDetails.contact.Mnumber',placeholder='Mobile ', aria-label='Mobile')
+            md-input-container
+              input(type='number', ng-model='newEmployee.personalDetails.contact.Hnumber',placeholder='Home', aria-label='Home')
+          div Address
+          md-input-container
+            input(type='textarea', ng-model='newEmployee.personalDetails.Address', aria-label='Address')
+          div Email Address
+          md-input-container
+            input(type='email', ng-model='email',placeholder='Primary Email Address', aria-label='pAddress')
+          md-input-container
+            input(type='email', ng-model='newEmployee.emailAddress.secondary',placeholder='Secondary Email Address', aria-label='sAddress')
+          div Password
+            md-input-container
+              input(type='password', ng-model='password',placeholder='Passwords', aria-label='password')
+            md-input-container
+              input(type='password', ng-model='Repassword',placeholder='Retype Password', aria-label='password')
+          input.md-button(type='submit', value='Save')
+        div(layout='row', layout-align='end center')
+          md-button(ng-href='/login') Login
+      span(flex='')

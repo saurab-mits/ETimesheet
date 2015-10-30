@@ -1,0 +1,33 @@
+.projects-list(layout='row')
+  span(flex='')
+  div(layout='column')
+    h1 Projects
+    form.md-whiteframe-z1(ng-submit='save()', id='form', novalidate='', layout-padding='')
+      md-input-container
+        label Project Name
+        input(ng-model='newProject.name', placeholder='Name of The Project')
+      md-input-container
+        label Description
+        input(ng-model='newProject.description', placeholder='About Project' type="textarea")
+      div(layout='row', layout-align='space-around center') 
+            label Start Date
+            md-datepicker(ng-model='newProject.startDate', md-placeholder='From')
+            label End Date
+            md-datepicker(ng-model='newProject.endDate', md-placeholder='To')
+      br
+      ul Members
+        li(ng-repeat='employee in employees', style="list-style-type: none;")
+          input(type='checkbox', checklist-model='mem', checklist-value='employee._id', ng-disabled="shouldBeDisabled(employee.deleted)", ng-click="toggle(employee._id, member)", ng-checked="exists(employee._id, member)" )
+          {{employee.name}} {{employee.emailAddress.primary}}
+        
+      br
+      label(layout='row') Parent
+      md-select(ng-model='newProject.parent', placeholder='Select Parent Project if any')
+       md-option(ng-value='project._id', ng-repeat='project in projects') {{ project.name }}
+
+      input.md-button(type='submit', value='Add')
+    
+
+    p Total number of projects: {{projectsCount.count}}
+    a(href='/adashboard') Cancel
+  span(flex='')

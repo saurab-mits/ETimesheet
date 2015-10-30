@@ -1,0 +1,58 @@
+.addTimesheet(layout='row')
+  span(flex='')
+  div(layout='column')
+    h1 Add Timesheet
+    form.md-whiteframe-z1(ng-submit='save()', name='form', novalidate='', layout-padding='')
+      table(border='1px')
+        thead
+          tr
+            th 
+              a(href='#', ng-click="sortType = 'name'; sortReverse = !sortReverse") Project
+              span(ng-show="sortType == 'name' && !sortReverse")
+              span(ng-show="sortType == 'name' && sortReverse")
+            th 
+              a(href='#', ng-click="sortType = 'Timetaken'; sortReverse = !sortReverse") Time Taken
+              span(ng-show="sortType == 'Timetaken' && !sortReverse")
+              span(ng-show="sortType == 'Timetaken' && sortReverse")
+            th
+              a(href='#', ng-click="sortType = 'Description'; sortReverse = !sortReverse") Description
+              span(ng-show="sortType == 'Description' && !sortReverse")
+              span(ng-show="sortType == 'Description' && sortReverse")
+            
+            th Operations
+                
+          tr
+            td
+              md-select(ng-model='newDailyLog.name', placeholder='Project Title')
+               md-option(ng-value='project._id', ng-repeat='project in projects',ng-click="set(project.name)") {{ project.name }}
+            td
+              md-input-container
+                input(ng-model='newDailyLog.Timetaken', placeholder='hrs',type='number')
+                label hrs
+            td
+              md-input-container
+                input(ng-model='newDailyLog.Description', placeholder='',type='textarea')
+                label Task
+            td
+              button(ng-click='save1()') Add New Row
+          tr(dir-paginate='dailyLog in dailyLogs | itemsPerPage: perPage | orderBy:sortType:sortReverse', total-items='dailyLogsCount.count',  current-page='page')
+            td
+              md-select(ng-model='dailyLog.name', placeholder='Project Title')
+                md-option(ng-value='project._id', ng-repeat='project in projects',ng-click="set(project.name)") {{ project.name }}
+             
+            td
+              md-input-container
+                input(ng-model='dailyLog.Timetaken', placeholder='hrs',type='number')
+                label hrs
+      
+              
+            td
+              md-input-container
+                input(ng-model='dailyLog.Description', placeholder='',type='textarea')
+                label Task
+              
+            td
+              button(ng-click='remove(dailyLog)') Remove
+
+      input.md-button(type='submit', value='Save', style='float:right;')
+  span(flex='')

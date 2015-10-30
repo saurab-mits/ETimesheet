@@ -1,0 +1,36 @@
+.employee-detail(layout='row')
+  span(flex='')
+  div(layout='column')
+    h1 Welcome To E-Timesheet Management System
+    form.md-whiteframe-z1(ng-submit='save()', name='form', novalidate='', layout-padding='')
+      div(layout='row', layout-align='space-around left') 
+            div Name
+            md-input-container
+              input(type='text', required name='name',ng-model='employee.name',placeholder='First Name', aria-label='Fname')
+
+              div(ng-messages='form.name.$error' ng-if='form.name.$touched')
+                div(ng-message='required') 
+                  This is required
+               
+
+            md-input-container
+              input(type='text', ng-model='employee.Mname',placeholder='Middle Name', aria-label='Mname')
+            md-input-container
+              input(type='text', ng-model='employee.Lname',placeholder='Last Name', aria-label='Lname')
+      div(layout='row', layout-align='space-around left') 
+        div Contact
+        md-input-container
+          input(type='number', ng-model='employee.personalDetails.Contact.Mnumber',placeholder='Mobile ', aria-label='Mobile')
+        
+      div Address
+      md-input-container
+        input(type='textarea', ng-model='employee.personalDetails.Address', aria-label='Address')
+      div Email Address
+      md-input-container
+        input(type='email', ng-model='employee.emailAddress.primary',placeholder='Primary Email Address', aria-label='pAddress')
+      md-input-container
+        input(type='email', ng-model='employee.emailAddress.secondary',placeholder='Secondary Email Address', aria-label='sAddress')
+    input.md-button(type='submit', value='Update')
+    md-button(ng-href='/userlist') Cancel
+  span(flex='')
+  

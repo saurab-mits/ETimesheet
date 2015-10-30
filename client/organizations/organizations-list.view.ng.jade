@@ -1,0 +1,30 @@
+.organizations-list(layout='row')
+  span(flex='')
+  div(layout='column')
+    h1 Organizations
+    form.md-whiteframe-z1(ng-submit='save()', name='form', novalidate='', layout-padding='')
+      p Add a organization
+      md-input-container
+        label Name
+        input(ng-model='newOrganization.name', placeholder='Name')
+      label Address
+      textarea(ng-model='newOrganization.address',placeholder="Address")
+      md-input-container
+        label Contact
+        input(ng-model='newOrganization.Contact.Phone',type='number', placeholder='Contact Number')
+      md-input-container
+        label Email
+        input(ng-model='newOrganization.email', placeholder='Email Address', type='email')
+
+      input.md-button(type='submit', value='Add')
+    
+    ul
+      li(dir-paginate='organization in organizations | itemsPerPage: perPage', total-items='organizationsCount.count',  current-page='page')
+        p 
+          a(href='/organizations/{{organization._id}}') {{ organization.name }}
+          button(ng-click='remove(organization)') &times;
+    dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)')
+
+    p Total number of organizations: {{organizationsCount.count}}
+    a(href='/adashboard') Cancel
+  span(flex='')

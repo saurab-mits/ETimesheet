@@ -1,0 +1,36 @@
+.emplst(layout='row')
+  span(flex='')
+  div(layout='column')
+    h1 User Management
+    table(padding='1px',border='1px',float='left')
+      thead
+        tr
+         th S.no
+         th
+          a(href='#', ng-click="sortType = 'name'; sortReverse = !sortReverse") Name
+          span(ng-show="sortType == 'name' && !sortReverse")
+          span(ng-show="sortType == 'name' && sortReverse")
+         th 
+          a(href='#', ng-click="sortType = 'Mnumber'; sortReverse = !sortReverse") Contact
+          span(ng-show="sortType == 'Mnumber' && !sortReverse")
+          span(ng-show="sortType == 'Mnumber' && sortReverse")
+         th
+          a(href='#', ng-click="sortType = 'primary'; sortReverse = !sortReverse")  Email Address
+          span(ng-show="sortType == 'primary' && !sortReverse")
+          span(ng-show="sortType == 'primary' && sortReverse")
+         th Options
+        tr(ng-repeat='employee in employees | orderBy:sortType:sortReverse')
+         td {{$index+1}}
+         td {{employee.name}} {{employee.Lname}}
+         td {{employee.personalDetails.Contact.Mnumber}}
+         td {{employee.emailAddress.primary}}
+         td 
+          a(ng-href='/employees/{{employee._id}}') Edit
+          button(ng-click='remove(employee._id)') Delete
+          a(ng-href='/adminreset/{{employee._id}}') Reset Password
+        tr
+         td(colspan='5') .
+        tr
+         td(colspan='5') Total number of Users: {{employeesCount.count}}
+    a(ng-href='/adashboard') Cancel
+  span(flex='')

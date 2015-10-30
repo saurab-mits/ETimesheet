@@ -1,0 +1,21 @@
+.organization-detail(layout='row')
+  span(flex='')
+  div(layout='column')
+    h1 Here are the details of the organization
+    form.md-whiteframe-z1(name='form', ng-submit='save()', layout-padding='')
+      md-input-container
+        label Name
+        input(ng-model='organization.name', placeholder='Name')
+      label Address
+      textarea(ng-model='organization.address',placeholder="Address")
+      md-input-container
+        label Contact
+        input(ng-model='organization.Contact.Phone',type='number', placeholder='Contact Number')
+      md-input-container
+        label Email
+        input(ng-model='organization.email', placeholder='Email Address', type='email')
+      div(layout='row')
+        input.md-button(type='submit', value='Save')
+        md-button(ng-click='reset()') Reset
+        md-button(ng-href='/organizations') Cancel
+  span(flex='')

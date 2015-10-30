@@ -1,0 +1,22 @@
+.emplst(layout='row')
+  span(flex='')
+  div(layout='column')
+    h1 User Management
+    table(padding='1px',border='1px',float='left')
+      thead
+        tr
+         th S.no
+         th Name
+         th Contact
+         th Email Address
+         th Options
+        tr(ng-repeat='employee in employees')
+         td {{$index+1}}
+         td {{employee.name}} {{employee.Lname}}
+         td {{employee.personalDetails.Contact.Mnumber}}
+         td {{employee.emailAddress[0].primary}}
+         td 
+          a(ng-href='/{{employee._id}}') Edit
+          button(ng-click='remove(employee._id)') Delete
+          a(ng-href='/adminreset/{{employee._id}}') Reset Password
+  span(flex='')

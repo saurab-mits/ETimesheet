@@ -1,0 +1,15 @@
+.department-detail(layout='row')
+  span(flex='')
+  div(layout='column')
+    h1 Here are the details of the department
+    form.md-whiteframe-z1(name='form', ng-submit='save()', layout-padding='')
+      md-input-container
+        label Name
+        input(ng-model='department.name', placeholder='Name')
+      Label Description
+      textarea(ng-model='department.description')
+      div(layout='row')
+        input.md-button(type='submit', value='Save')
+        md-button(ng-click='reset()') Reset
+        md-button(ng-href='/departments') Cancel
+  span(flex='')

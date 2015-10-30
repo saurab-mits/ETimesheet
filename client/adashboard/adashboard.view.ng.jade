@@ -1,0 +1,28 @@
+.adashboard(layout='row')
+  span(flex='')
+  div(layout='column')
+    h1 Admin Dashboard
+    br
+    br
+    table(padding='1px', float='left')
+      thead
+        tr
+         th(colspan="2") user Management
+        tr
+         td
+          md-button.md-raised.md-primary(ng-click='manEmp()') Manage Employees
+         td
+          md-button.md-raised.md-primary(ng-click='manOrg()') Manage Organization
+        tr
+         th(colspan="2") List Data Management
+        tr
+         td
+          md-button.md-raised.md-primary(ng-click='manDep()') Manage Departments
+         td
+          md-button.md-raised.md-primary(ng-click='manDes()') Manage Designations
+        tr
+         td
+          a(ng-href="/projects") Add Projects
+         td
+          a(ng-href="/dailylogs") View Daily Log
+  span(flex='')

@@ -1,0 +1,16 @@
+.udashboard(layout='row')
+  span(flex='')
+  div(layout='column')
+    h1 User Dashboard
+    br
+    br
+  div(layout='row', layout-align='space-around center')
+            br
+            div Name
+            br
+            md-button.md-raised.md-primary(ng-click='addTime()')
+            | Add Timesheet
+
+            md-button.md-raised.md-primary(ng-click='addLeave()')
+            | Add Leave
+  span(flex='')

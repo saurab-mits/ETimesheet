@@ -1,0 +1,19 @@
+.main(layout='row')
+md-content(layout='row')
+      span(flex='')
+      md-whiteframe(layout='column', flex='50')
+        div(layout='row', layout-align='space-around center')
+          div Login with:
+          md-button Twitter
+          md-button Facebook
+        .md-warn(ng-show='error')
+          small {{ error }}
+        form(layout='column')
+          md-input-container
+            input(type='text', ng-model='credentials.email', placeholder='email', aria-label='email')
+          md-input-container
+            input(type='password', ng-model='credentials.password', placeholder='password', aria-label='password')
+        div(layout='row', layout-align='space-around center')
+          md-button(ng-click='login()') login
+          md-button(ng-href='employees') Register
+      span(flex='')
