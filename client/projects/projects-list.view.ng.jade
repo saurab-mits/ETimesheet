@@ -1,8 +1,8 @@
 .projects-list(layout='row')
   span(flex='')
   div(layout='column')
-    h1 Projects
-    form.md-whiteframe-z1(ng-submit='save()', id='form', novalidate='', layout-padding='')
+    h1(ng-if='IsVisible') Projects
+    form.md-whiteframe-z1(ng-submit='save()', id='form',ng-show = 'IsVisible', novalidate='', layout-padding='')
       md-input-container
         label Project Name
         input(ng-model='newProject.name', placeholder='Name of The Project')
@@ -17,7 +17,7 @@
       br
       ul Members
         li(ng-repeat='employee in employees', style="list-style-type: none;")
-          input(type='checkbox', checklist-model='mem', checklist-value='employee._id', ng-disabled="shouldBeDisabled(employee.deleted)", ng-click="toggle(employee._id, member)", ng-checked="exists(employee._id, member)" )
+          input(type='checkbox', checklist-model='mem', checklist-value='employee.emailAddress.primary', ng-disabled="shouldBeDisabled(employee.deleted)", ng-click="toggle(employee.emailAddress.primary, member)", ng-checked="exists(employee.emailAddress.primary, member)" )
           {{employee.name}} {{employee.emailAddress.primary}}
         
       br
@@ -26,8 +26,34 @@
        md-option(ng-value='project._id', ng-repeat='project in projects') {{ project.name }}
 
       input.md-button(type='submit', value='Add')
-    
-
-    p Total number of projects: {{projectsCount.count}}
-    a(href='/adashboard') Cancel
+      button(ng-click='cancel()') Cancel
+    p(ng-if='!IsVisible')
+      button(ng-click='ShowHide()') Add Project
+    h2(ng-if='!IsVisible') List of the Added Project are
+    table(padding='1px',border='1px',float='left', ng-if='!IsVisible')
+      thead
+        tr
+          th S.No
+          th
+            a(href='#', ng-click="sortType = 'name'; sortReverse = !sortReverse") Project
+            span(ng-show="sortType == 'name' && !sortReverse")
+            span(ng-show="sortType == 'name' && sortReverse")
+          th
+            a(href='#', ng-click="sortType = 'description'; sortReverse = !sortReverse") Description
+            span(ng-show="sortType == 'description' && !sortReverse")
+            span(ng-show="sortType == 'description' && sortReverse")
+          th Operation
+        tr(dir-paginate='project in projects | itemsPerPage: perPage | orderBy:sortType:sortReverse', total-items='projectsCount.count',  current-page='page')
+          td
+            {{$index+1}}
+          td
+            {{ project.name }}
+          td
+            {{ project.description }}
+          td
+            a(href='/projects/{{project._id}}') Edit
+            button(ng-click='remove(project._id)') Remove
+    dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)', ng-if='!IsVisible')
+    p(ng-if='!IsVisible') Total number of projects: {{projectsCount.count}}
+     
   span(flex='')

@@ -1,14 +1,14 @@
 'use strict'
 
 angular.module 'etimesheetApp'
-.controller 'DailyLogsListCtrl', ($scope, $meteor, $stateParams, $rootScope) ->
+.controller 'DailyLogsListCtrl', ($scope, $meteor, $stateParams, $rootScope, $mdToast,$state) ->
   $scope.page = 1
   $scope.perPage = 10
   $scope.pname=""
   $scope.sort = name : 1
   $scope.orderProperty = '1'
   $scope.Times=[
-     {pname:'Etimesheet', Timetaken:2, description:'Task1'}
+  #   {pname:'Etimesheet', Timetaken:2, description:'Task1'}
   ]
 
   
@@ -17,7 +17,7 @@ angular.module 'etimesheetApp'
   $scope.dailyLogs = $scope.$meteorCollection () ->
     DailyLogs.find {}, {sort:$scope.getReactively('sort')}
   $scope.projects = $scope.$meteorCollection () ->
-    Projects.find {}, {sort:$scope.getReactively('sort')}
+    Projects.find {'member':$rootScope.currentUser.emails[0].address}, {sort:$scope.getReactively('sort')}
   $meteor.autorun $scope, () ->
     $scope.$meteorSubscribe('dailyLogs', {
       limit: parseInt($scope.getReactively('perPage'))
@@ -38,7 +38,7 @@ angular.module 'etimesheetApp'
     console.log($scope.pname)
   $scope.addRow=()->
     $scope.Times.push({pname:$scope.newDailyLog.name,Timetaken:$scope.newDailyLog.Timetaken,description:$scope.newDailyLog.Description,user:$rootScope.currentUser._id,createdDate:new Date()})
-    $scope.newDailyLog = undefined
+    $scope.newDailyLog = ''
     
   
   
@@ -50,8 +50,13 @@ angular.module 'etimesheetApp'
     #$scope.newDailyLog.user=$rootScope.currentUser._id
     #$scope.newDailyLog.createdDate=new Date()
     $scope.dailyLogs.save $scope.newDailyLog
-    $scope.newDailyLog = undefined
-    $scope.Times= undefined
+    $scope.newDailyLog = ''
+    $scope.Times= ''
+    $mdToast.show($mdToast.simple().content('Datas Saved succesfully...!'))
+    #$window.location.reload()
+    $scope.Times=[]
+    $scope.newDailyLog= undefined
+    $state.go 'udashboard'
       
   #$scope.remove = (time) ->
   #  $scope.Times.remove time

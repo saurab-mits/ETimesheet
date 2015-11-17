@@ -1,7 +1,7 @@
 .dailyLog-detail(layout='row')
   span(flex='')
   div(layout='column')
-    h1 Here are the details of the dailyLog
+    h1 List of the dailyLog
     table(padding='1px',border='1px',float='left')
       thead
         tr
@@ -14,7 +14,10 @@
           a(href='#', ng-click="sortType = 'user'; sortReverse = !sortReverse") Record By
           span(ng-show="sortType == 'user' && !sortReverse")
           span(ng-show="sortType == 'user' && sortReverse")
-         th Project name
+         th 
+          a(href='#', ng-click="sortType = 'pname'; sortReverse = !sortReverse") Project name
+          span(ng-show="sortType == 'pname' && !sortReverse")
+          span(ng-show="sortType == 'pname' && sortReverse")
          th 
           a(href='#', ng-click="sortType = 'description'; sortReverse = !sortReverse")  Description
           span(ng-show="sortType == 'description' && !sortReverse")
@@ -24,17 +27,16 @@
           span(ng-show="sortType == 'Timetaken' && !sortReverse")
           span(ng-show="sortType == 'Timetaken' && sortReverse")
 
-        tr(ng-repeat='dailyLog in dailyLogs | orderBy:sortType:sortReverse')
-         td {{$index+1}}
-         td {{dailyLog.createdDate}} 
-         td {{dailyLog.user}} 
+        tr(dir-paginate='dailyLog in dailyLogs | orderBy:sortType:sortReverse |  itemsPerPage: perPage',total-items='dailyLogsCount.count', current-page='page')
+         td {{ $index+1 }}
+         td {{ dailyLog.createdDate | date:'fullDate' }} 
+         td {{ dailyLog.user }} 
 
-         td 
-          md-select(ng-model='dailyLog.pname', placeholder='Project Title')
-            md-option(ng-value='project._id', ng-repeat='project in projects',ng-click="set(project.name)") {{ project.name }}
-         td {{dailyLog.description}}
-         td {{dailyLog.Timetaken}} hrs
-    a(href='/adashboard') Cancel
+         td {{ dailyLog.pname}}
+         td {{ dailyLog.description }}
+         td {{ dailyLog.Timetaken }} hrs
+    dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)')
+    
          
     
   span(flex='')

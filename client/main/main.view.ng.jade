@@ -13,10 +13,10 @@ md-content(layout='row')
           small {{ error }}
         form(layout='column')
           md-input-container
-            input(type='text', ng-model='credentials.email', placeholder='email', aria-label='email')
+            input(type='text', ng-model='credentials.email', placeholder='email', aria-label='email', ng-focus)
           md-input-container
             input(type='password', ng-model='credentials.password', placeholder='password', aria-label='password')
         div(layout='row', layout-align='space-around center')
           md-button(ng-click='login()') login
-          md-button(ng-href='employees') Register
+          md-button(ng-href='/employees') Register
       span(flex='')

@@ -1,10 +1,11 @@
 'use strict'
 
 angular.module 'etimesheetApp'
-.controller 'ProjectsListCtrl', ($scope, $meteor) ->
+.controller 'ProjectsListCtrl', ($scope, $meteor, $mdToast) ->
   $scope.page = 1
-  $scope.perPage = 10
-  $scope.sort = name_sort : 1
+  $scope.perPage = 5
+  $scope.IsVisible=false
+  $scope.sort = name : 1
   $scope.orderProperty = '1'
   $scope.member=[]
   $scope.idx=0
@@ -27,6 +28,10 @@ angular.module 'etimesheetApp'
         
   $meteor.session 'projectsCounter'
   .bind $scope, 'page'
+  $scope.cancel=()->
+    $scope.IsVisible = false
+  $scope.ShowHide=()->
+    $scope.IsVisible = true
 
   $scope.shouldBeDisabled= (employee)->
    # console.log(employee+" "+"Here at disabled function ")
@@ -36,14 +41,14 @@ angular.module 'etimesheetApp'
       return false
   
     
-  $scope.exist=(empid,list)->
-    return list.indexOf(empid) > -1
-  $scope.toggle =  (empid, list)->
-    $scope.idx = list.indexOf(empid)
+  $scope.exist=(emp,list)->
+    return list.$indexOf(emp) > -1
+  $scope.toggle =  (emp, list)->
+    $scope.idx = list.indexOf(emp)
     if($scope.idx > -1)
      list.splice($scope.idx, 1)
     else
-     list.push(empid)
+     list.push(emp)
 
     
   $scope.save = () ->
@@ -54,13 +59,17 @@ angular.module 'etimesheetApp'
     $scope.projects.save $scope.newProject
     $scope.newProject = undefined
     document.getElementById("form").reset()
+    $mdToast.show($mdToast.simple().content('Project Saved Sucessfully'))
+    $scope.IsVisible = false
+
       
   $scope.remove = (project) ->
     $scope.projects.remove project
+    $mdToast.show($mdToast.simple().content('Project Removed Sucessfully'))
     
   $scope.pageChanged = (newPage) ->
     $scope.page = newPage
     
   $scope.$watch 'orderProperty', () ->
     if $scope.orderProperty
-      $scope.sort = name_sort: parseInt($scope.orderProperty)
+      $scope.sort = name: parseInt($scope.orderProperty)

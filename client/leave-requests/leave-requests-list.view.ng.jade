@@ -5,15 +5,10 @@
       h1 Add Leave Request
       div(layout='row', layout-align='space-around left') 
             label Leave
-            md-datepicker(ng-model='startDate', md-placeholder='From')
-            md-datepicker(ng-model='endDate', md-placeholder='To')
+            md-datepicker(ng-model='startDate', md-placeholder='From', date-format="yyyy-MM-dd")
+            md-datepicker(ng-model='endDate', md-placeholder='To', date-format="yyyy-MM-dd")
       md-input-container
         Label Leave Reason
         input(ng-model='newLeaveRequest.reason', placeholder='Mention Reason Here' type="textarea")
       input.md-button(type='submit', value='Submit')
-
-    
-
-    p Total number of leaveRequests: {{leaveRequestsCount.count}}
-    a(href="/udashboard") Cancel
   span(flex='')

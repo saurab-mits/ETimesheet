@@ -1,8 +1,8 @@
 .departments-list(layout='row')
   span(flex='')
   div(layout='column')
-    h1 Departments
-    form.md-whiteframe-z1(ng-submit='save()', name='form', novalidate='', layout-padding='')
+    h1(ng-if='IsVisible') Departments
+    form.md-whiteframe-z1(ng-submit='save()', name='form', novalidate='', layout-padding='', ng-show='IsVisible')
       p Add a department
       md-input-container
         label Name
@@ -10,16 +10,35 @@
       Label Description
       textarea(ng-model='newDepartment.description',placeholder='Description')
       input.md-button(type='submit', value='Add')
+      button(ng-click='cancel()') Cancel
+    p(ng-if='!IsVisible')
+      button(ng-click='ShowHide()') Add Department
+    h2(ng-if='!IsVisible') List of the Added Department are
+    table(padding='1px',border='1px',float='left', ng-if='!IsVisible')
+      thead
+        tr
+          th S.No
+          th
+            a(href='#', ng-click="sortType = 'name'; sortReverse = !sortReverse") Department
+            span(ng-show="sortType == 'name' && !sortReverse")
+            span(ng-show="sortType == 'name' && sortReverse")
+          th
+            a(href='#', ng-click="sortType = 'description'; sortReverse = !sortReverse") Description
+            span(ng-show="sortType == 'description' && !sortReverse")
+            span(ng-show="sortType == 'description' && sortReverse")
+          th Operation
+        tr(dir-paginate='department in departments | itemsPerPage: perPage | orderBy:sortType:sortReverse', total-items='departmentsCount.count',  current-page='page')
+          td
+            {{$index+1}}
+          td
+            {{ department.name }}
+          td
+            {{ department.description }}
+          td
+            a(href='/departments/{{department._id}}') Edit
+            button(ng-click='remove(department._id)') Remove
+     dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)',ng-if='!IsVisible')
     
-
-    ul
-      li(dir-paginate='department in departments | itemsPerPage: perPage', total-items='departmentsCount.count',  current-page='page')
-        p 
-          a(href='/departments/{{department._id}}') {{ department.name }}
-          
-          button(ng-click='remove(department._id)') &times;
-    dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)')
-
-    p Total number of departments: {{departmentsCount.count}}
-    a(href='/adashboard') Cancel
+     
   span(flex='')
+    

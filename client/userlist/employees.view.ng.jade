@@ -19,18 +19,19 @@
           span(ng-show="sortType == 'primary' && !sortReverse")
           span(ng-show="sortType == 'primary' && sortReverse")
          th Options
-        tr(ng-repeat='employee in employees | orderBy:sortType:sortReverse')
+        tr(dir-paginate='employee in employees | itemsPerPage: perPage |  orderBy:sortType:sortReverse', total-items='employeesCount.count',  current-page='page')
          td {{$index+1}}
          td {{employee.name}} {{employee.Lname}}
          td {{employee.personalDetails.Contact.Mnumber}}
          td {{employee.emailAddress.primary}}
          td 
           a(ng-href='/employees/{{employee._id}}') Edit
-          button(ng-click='remove(employee._id)') Delete
-          a(ng-href='/adminreset/{{employee._id}}') Reset Password
+          button(ng-click='remove(employee._id,employee.emailAddress.primary)') Delete
+          a(ng-href='/reset/{{employee._id}}') Reset Password
         tr
          td(colspan='5') .
         tr
          td(colspan='5') Total number of Users: {{employeesCount.count}}
-    a(ng-href='/adashboard') Cancel
+    dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)')
+    
   span(flex='')

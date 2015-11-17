@@ -2,17 +2,26 @@
 
 angular.module 'etimesheetApp'
 .controller 'LeaveRequestDetailCtrl', ($scope, $stateParams, $meteor) ->
-  $scope.leaveRequest = $scope.$meteorObject LeaveRequests, $stateParams.leaveRequestId
-  $scope.$meteorSubscribe('leaveRequests')
+  $scope.page = 1
+  $scope.perPage = 5
+  $scope.sort = name : 1
+  $scope.orderProperty = '1'
+
   
-  $scope.save = () ->
-    if $scope.form.$valid
-      $scope.leaveRequest.save().then(
-        (numberOfDocs) ->
-          console.log 'save successful, docs affected ', numberOfDocs
-        (error) ->
-          console.log 'save error ', error
-      )
-        
-  $scope.reset = () ->
-    $scope.leaveRequest.reset()
+  $scope.leaveRequests = $scope.$meteorCollection () ->
+    LeaveRequests.find {}, {sort:$scope.getReactively('sort')}
+  $meteor.autorun $scope, () ->
+    $scope.$meteorSubscribe('leaveRequests', {
+      limit: parseInt($scope.getReactively('perPage'))
+      skip: parseInt(($scope.getReactively('page') - 1) * $scope.getReactively('perPage'))
+      sort: $scope.getReactively('sort')
+    }, $scope.getReactively('search')).then () ->
+      $scope.leaveRequestsCount = $scope.$meteorObject Counts, 'numberOfLeaveRequests', false
+
+  $meteor.session 'leaveRequestsCounter'
+  .bind $scope, 'page'
+    
+
+  $scope.$watch 'orderProperty', () ->
+    if $scope.orderProperty
+      $scope.sort = name: parseInt($scope.orderProperty)

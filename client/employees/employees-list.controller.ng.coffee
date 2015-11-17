@@ -1,9 +1,9 @@
 'use strict'
 
 angular.module ('etimesheetApp')
-.controller 'EmployeesListCtrl', ($scope, $meteor, $state) ->
+.controller 'EmployeesListCtrl', ($scope, $meteor, $state, $mdToast) ->
   $scope.page = 1
-  $scope.perPage = 3
+  $scope.perPage = 10
   $scope.sort = name_sort : 1
   $scope.orderProperty = '1'
 
@@ -31,6 +31,7 @@ angular.module ('etimesheetApp')
       primary : $scope.email
     }
     $scope.employees.save $scope.newEmployee
+    $mdToast.show($mdToast.simple().content('Employees registered Sucessfully'))
     console.log($scope.newEmployee.emailAddress.secondary)
     console.log($scope.newEmployee.emailAddress.primary)
     console.log($scope.newEmployee.Lname)
@@ -48,12 +49,13 @@ angular.module ('etimesheetApp')
           Meteor.call('chkEmailVerify',Meteor.userId(),$scope.emailToVerify)
           $state.go('not-verified',{userId: Meteor.userId()})
         else
-          $state.go('udashboard')
+          $state.go('main')
     )
     
       
   $scope.remove = (employee) ->
     $scope.employees.remove employee
+    $mdToast.show($mdToast.simple().content('Data removed Sucessfully'))
     
   $scope.pageChanged = (newPage) ->
     $scope.page = newPage

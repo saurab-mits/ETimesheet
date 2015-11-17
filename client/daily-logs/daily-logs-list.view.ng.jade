@@ -18,13 +18,11 @@
               a(href='#', ng-click="sortType = 'Description'; sortReverse = !sortReverse") Description
               span(ng-show="sortType == 'Description' && !sortReverse")
               span(ng-show="sortType == 'Description' && sortReverse")
-            
             th Operations
-                
           tr
             td
               md-select(ng-model='newDailyLog.name', placeholder='Project Title')
-               md-option(ng-value='project._id', ng-repeat='project in projects',ng-click="set(project.name)") {{ project.name }}
+               md-option(ng-value='project.name', ng-repeat='project in projects',ng-click="set(project.name)") {{ project.name }}
             td
               md-input-container
                 input(ng-model='newDailyLog.Timetaken',placeholder='hrs',type='number')
@@ -38,7 +36,7 @@
           tr(ng-repeat="time in Times")
             td
               md-select(ng-model='time.pname', placeholder='Project Title')
-                md-option(ng-value='project._id', ng-repeat='project in projects',ng-click="set(project.name)") {{ project.name }}
+                md-option(ng-value='project.name', ng-repeat='project in projects',ng-click="set(project.name)") {{ project.name }}
              
             td
               md-input-container
@@ -55,5 +53,5 @@
               button(ng-click='Times.splice($index, 1)') Remove
 
       button(ng-click='save()', style='float:right;') Save
-    a(href="/udashboard") Cancel
+    
   span(flex='')

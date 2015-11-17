@@ -9,10 +9,7 @@
               input(type='text', required name='name',ng-model='newEmployee.name',placeholder='First Name', aria-label='Fname')
 
               div(ng-messages='form.name.$error' ng-if='form.name.$touched')
-                div(ng-message='required') 
-                  This is required
-               
-
+                div(ng-message='required') This is required
             md-input-container
               input(type='text', ng-model='newEmployee.Mname',placeholder='Middle Name', aria-label='Mname')
             md-input-container
@@ -38,5 +35,5 @@
           input(type='password', ng-model='Repassword',placeholder='Retype Password', aria-label='password')
       
       input.md-button(type='submit', value='Register')
-    p Total number of employees: {{employeesCount.count}}
+    
   span(flex='')

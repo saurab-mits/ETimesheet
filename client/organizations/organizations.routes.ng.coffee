@@ -9,7 +9,11 @@ angular.module 'etimesheetApp'
     controller: 'OrganizationsListCtrl'
     resolve:
       currentUser: ['$meteor', ($meteor) ->
-        $meteor.requireUser()
+        $meteor.requireValidUser((user)->
+          if(user.emails[0].address=="admin@etimesheet.com")
+             return true
+           return 'UNAUTHORIZED'
+         )
       ]
   .state 'organization-detail',
     url: '/organizations/:organizationId'
@@ -17,5 +21,9 @@ angular.module 'etimesheetApp'
     controller: 'OrganizationDetailCtrl'
     resolve:
       currentUser: ['$meteor', ($meteor) ->
-        $meteor.requireUser()
+        $meteor.requireValidUser((user)->
+          if(user.emails[0].address=="admin@etimesheet.com")
+             return true
+           return 'UNAUTHORIZED'
+         )
       ]

@@ -9,10 +9,7 @@
               input(type='text', required name='name',ng-model='employee.name',placeholder='First Name', aria-label='Fname')
 
               div(ng-messages='form.name.$error' ng-if='form.name.$touched')
-                div(ng-message='required') 
-                  This is required
-               
-
+                div(ng-message='required') This is required
             md-input-container
               input(type='text', ng-model='employee.Mname',placeholder='Middle Name', aria-label='Mname')
             md-input-container
@@ -21,6 +18,8 @@
         div Contact
         md-input-container
           input(type='number', ng-model='employee.personalDetails.Contact.Mnumber',placeholder='Mobile ', aria-label='Mobile')
+        md-input-container
+          input(type='number', ng-model='employee.personalDetails.Contact.Hnumber',placeholder='Home ', aria-label='Home')
         
       div Address
       md-input-container
@@ -30,6 +29,9 @@
         input(type='email', ng-model='employee.emailAddress.primary',placeholder='Primary Email Address', aria-label='pAddress')
       md-input-container
         input(type='email', ng-model='employee.emailAddress.secondary',placeholder='Secondary Email Address', aria-label='sAddress')
+      div Designation
+      md-select(ng-model='employee.designation', placeholder='Designation')
+        md-option(ng-value='designation.name', ng-repeat='designation in designations') {{ designation.name }}
     input.md-button(type='submit', value='Update')
     md-button(ng-href='/userlist') Cancel
   span(flex='')

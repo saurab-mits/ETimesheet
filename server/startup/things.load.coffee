@@ -1,23 +1,41 @@
 Meteor.startup ->
   if Meteor.users.find().count() == 0
-    options =
-      email: 'admin@etimesheet.com'
-      password: 'admin'
-      profile: [
-        role:'admin'
-      ]
-  if Things.find().count() == 0
-    things = [
-      'Data on the Wire'
-      'One Language'
-      'Database Everywhere'
-      'Latency Compensation'
-      'Full Stack Reactivity'
-      'Embrace the Ecosystem'
-      'Simplicity Equals Productivity'
+    users =[
+      {
+        "_id" : "DbLfBj8TBLzhCDjf2",
+        "createdAt" : new Date(),
+        "services" : {
+                "password" : {
+                        "bcrypt" : "$2a$10$fNLFjFtkffTWCEG/G5AEquH9d8A/zSqBEpY2AdcCArySLa/QHpKru"
+                },
+                "resume" : {
+                        "loginTokens" : [
+                                {
+                                        "when" : new Date(),
+                                        "hashedToken" : "YZ/Fir65ZsQNyJJgEmfwdnv7+ZcT5opeZx8tkyiddqY="
+                                }
+                        ]
+                },
+                "email" : {
+                        "verificationTokens" : [
+                                {
+                                        "token" : "rhK6MXlpFWmX3dqok1wQqBwx5_bKK9dsOP3ShA0FuYt",
+                                        "address" : "admin@etimesheet.com",
+                                        "when" : new Date()
+                                }
+                        ]
+                }
+        },
+        "emails" : [
+                {
+                        "address" : "admin@etimesheet.com",
+                        "verified" : true
+                }
+        ]
+      }
     ]
-    things.forEach (thing) ->
-      Things.insert
-        name: thing
-        name_sort: thing.toLowerCase()
-        createdAt: new Date()
+    users.forEach (user) ->
+      Meteor.users.insert user
+        
+      
+  

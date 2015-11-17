@@ -1,11 +1,5 @@
 Meteor.startup ->
-  if Meteor.users.find().count() == 0
-    options =
-      email: 'admin@etimesheet.com'
-      password: 'admin'
-      profile: [
-        role:'admin'
-      ]
+  
   if Login.find().count() == 0
     login = [
       {

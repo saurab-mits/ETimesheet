@@ -6,11 +6,20 @@ angular.module 'etimesheetApp'
   .state 'employees-list',
     url: '/employees'
     templateUrl: 'client/employees/employees-list.view.html'
-    controller: 'EmployeesListCtrl'    
+    controller: 'EmployeesListCtrl'
+    
   .state 'employee-detail',
     url: '/employees/:employeeId'
     templateUrl: 'client/employees/employee-detail.view.html'
     controller: 'EmployeeDetailCtrl'
+    resolve:
+      currentUser: ['$meteor', ($meteor) ->
+        $meteor.requireValidUser((user)->
+          if(user.emails[0].address=="admin@etimesheet.com")
+             return true
+           return 'UNAUTHORIZED'
+         )
+      ]
   .state 'udashboard',
     url: '/udashboard'
     templateUrl: 'client/udashboard/udashboard.view.html'
@@ -25,7 +34,11 @@ angular.module 'etimesheetApp'
     controller: 'adashboardctrl'
     resolve:
       currentUser: ['$meteor', ($meteor) ->
-        $meteor.requireUser()
+        $meteor.requireValidUser((user)->
+          if(user.emails[0].address=="admin@etimesheet.com")
+             return true
+           return 'UNAUTHORIZED'
+         )
       ]
   .state 'emplst',
     url: '/userlist'
@@ -33,7 +46,11 @@ angular.module 'etimesheetApp'
     controller: 'empListCtrl'
     resolve:
       currentUser: ['$meteor', ($meteor) ->
-        $meteor.requireUser()
+        $meteor.requireValidUser((user)->
+          if(user.emails[0].address=="admin@etimesheet.com")
+             return true
+           return 'UNAUTHORIZED'
+         )
       ]    
   .state 'not-verified',
     url: '/udashboard/notverified/:userId'

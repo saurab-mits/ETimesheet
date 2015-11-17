@@ -2,7 +2,7 @@
 
 Meteor.publish 'leaveRequests', (options, searchString) ->
   where =
-    'name':
+    'user':
       '$regex': '.*' + (searchString or '') + '.*'
       '$options': 'i'
   Counts.publish this, 'numberOfLeaveRequests', LeaveRequests.find(where), noReady: true

@@ -1,7 +1,7 @@
-angular.module 'etimesheet'
-.controller 'empListCtrl', ($scope, $meteor) ->
+angular.module 'etimesheetApp'
+.controller 'empListCtrl', ($scope, $meteor, $mdToast) ->
   $scope.page = 1
-  $scope.perPage = 5
+  $scope.perPage = 10
   $scope.sort = name : 1
   $scope.orderProperty = '1'
 
@@ -22,6 +22,7 @@ angular.module 'etimesheet'
     
   $scope.remove = (user) ->
     Meteor.call('remove',user)
+    $mdToast.show($mdToast.simple().content('Data removed Sucessfully'))
     
   $scope.pageChanged = (newPage) ->
     $scope.page = newPage

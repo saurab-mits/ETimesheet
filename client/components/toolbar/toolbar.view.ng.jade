@@ -1,6 +1,11 @@
 md-toolbar.toolbar(layout='row', layout-align='start center', layout-padding='')
   .navbar-left(layout='row', layout-align='center center')
     h3 E-Timesheet ...
+    div(ng-controller='toolCtrl', ng-if='currentUser.emails[0].address')
+      div(ng-if='user(currentUser.emails[0].address)')
+        a(href='/udashboard') Home
+      div(ng-if='!user(currentUser.emails[0].address)')
+        a(href='/adashboard') Home
     
     
     
@@ -8,5 +13,6 @@ md-toolbar.toolbar(layout='row', layout-align='start center', layout-padding='')
   span(flex='')
   .navbar-right 
     {{currentUser.emails[0].address}}
-    a(href='/logout') Logout
+    div(ng-if='currentUser.emails[0].address')
+      a(href='/logout') Logout
  

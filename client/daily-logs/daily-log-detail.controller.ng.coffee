@@ -1,9 +1,9 @@
 'use strict'
 
 angular.module 'etimesheetApp'
-.controller 'DailyLogDetailCtrl', ($scope, $stateParams, $meteor, $state) ->
+.controller 'DailyLogDetailCtrl', ($scope, $stateParams, $meteor, $state, $mdToast) ->
   $scope.page = 1
-  $scope.perPage = 5
+  $scope.perPage = 10
   $scope.sort = name : 1
   $scope.orderProperty = '1'
 
@@ -31,6 +31,7 @@ angular.module 'etimesheetApp'
     $scope.dailyLog.save().then(
       (numberOfDocs) ->
         console.log 'save successful, docs affected ', numberOfDocs
+        $mdToast.show($mdToast.simple().content('Data Saved Sucessfully'))
         $state.go 'addTimesheet'
       (error) ->
         console.log 'save error ', error
@@ -38,3 +39,4 @@ angular.module 'etimesheetApp'
         
   $scope.reset = () ->
     $scope.dailyLog.reset()
+    $mdToast.show($mdToast.simple().content('form reset Sucessfully'))

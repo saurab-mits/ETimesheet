@@ -22,7 +22,12 @@
           md-button.md-raised.md-primary(ng-click='manDes()') Manage Designations
         tr
          td
-          a(ng-href="/projects") Add Projects
+          md-button.md-raised.md-primary(ng-click='viewLeave()') View Leave Request
+          
          td
-          a(ng-href="/dailylogs") View Daily Log
+          md-button.md-raised.md-primary(ng-click='viewLog()') View Daily Log
+        tr
+          td
+            a(ng-href="/projects") Add Projects
+
   span(flex='')

@@ -10,4 +10,4 @@ angular.module 'etimesheetApp'
   $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
     switch error
       when 'AUTH_REQUIRED', 'FORBIDDEN', 'UNAUTHORIZED'
-        $state.go 'login'
+        $state.go 'main'

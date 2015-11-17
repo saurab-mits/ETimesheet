@@ -15,5 +15,7 @@ angular.module 'etimesheetApp'
 
   $scope.manDes = () ->
     $state.go('designations-list')
-  $scope.view=()->
+  $scope.viewLog=()->
     $state.go('dailyLog-detail')
+  $scope.viewLeave=()->
+    $state.go('leaveRequest-detail')

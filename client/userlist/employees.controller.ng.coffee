@@ -1,5 +1,5 @@
 angular.module 'etimesheetApp'
-.controller 'empListCtrl', ($scope, $stateParams, $meteor, $state) ->
+.controller 'empListCtrl', ($scope, $stateParams, $meteor, $state, $mdToast) ->
   $scope.page = 1
   $scope.perPage = 5
   $scope.sort = name : 1
@@ -20,9 +20,12 @@ angular.module 'etimesheetApp'
 
  
     
-  $scope.remove = (userId) ->
+  $scope.remove = (userId,useradd) ->
     console.log(userId)
+    console.log(useradd)
+    Meteor.call('remove', useradd)
     Meteor.call('update',userId)
+    $mdToast.show($mdToast.simple().content('user removed Sucessfully'))
     
     
       

@@ -3,6 +3,9 @@ Meteor.startup ->
     designations = [
       {
         'name': 'designation 1'
+        'description':'jpt'
+        'deleted' :'0'
+        'isActive': '1'
       }
       {
         'name': 'designation 2'

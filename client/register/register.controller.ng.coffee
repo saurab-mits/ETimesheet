@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'etimesheetApp'
-.controller 'RegisterCtrl', ['$scope', '$meteor', '$state', ($scope, $meteor, $state) ->
+.controller 'RegisterCtrl', ['$scope', '$meteor', '$state', ($scope, $meteor, $state, $mdToast) ->
   $scope.password = ''
   $scope.role = 'normal'
   $scope.error = ''
@@ -23,6 +23,7 @@ angular.module 'etimesheetApp'
     if $scope.form.$valid
       $scope.newEmployee.emailAddress.primary=$scope.email
       $scope.employees.save $scope.newEmployee
+      $mdToast.show($mdToast.simple().content('User registered Sucessfully'))
       console.log("saved")
       $scope.newEmployee = undefined
     Accounts.createUser({email:$scope.email,password:$scope.password,Role:$scope.role}, (error)->

@@ -1,8 +1,8 @@
 .designations-list(layout='row')
   span(flex='')
   div(layout='column')
-    h1 Designations
-    form.md-whiteframe-z1(ng-submit='save()', name='form', novalidate='', layout-padding='')
+    h1(ng-if='!IsVisible') Designations
+    form.md-whiteframe-z1(ng-submit='save()', name='form', ng-show='!IsVisible' novalidate='', layout-padding='')
       p Add a designation
       md-input-container
         label Name
@@ -10,15 +10,34 @@
       Label Description
       textarea(ng-model='newDesignation.description',placeholder='Description')
       input.md-button(type='submit', value='Add')
+      button(ng-click='cancel()') Cancel
+    p(ng-if='IsVisible')
+      button(ng-click='ShowHide()') Add Designation
+    h2(ng-if='IsVisible') List of the Added Designation are
+    table(padding='1px',border='1px',float='left', ng-if='IsVisible')
+      thead
+        tr
+          th S.No
+          th
+            a(href='#', ng-click="sortType = 'name'; sortReverse = !sortReverse") Designation
+            span(ng-show="sortType == 'name' && !sortReverse")
+            span(ng-show="sortType == 'name' && sortReverse")
+          th
+            a(href='#', ng-click="sortType = 'description'; sortReverse = !sortReverse") Description
+            span(ng-show="sortType == 'description' && !sortReverse")
+            span(ng-show="sortType == 'description' && sortReverse")
+          th Operation
+        tr(dir-paginate='designation in designations | itemsPerPage: perPage | orderBy:sortType:sortReverse', total-items='designationsCount.count',  current-page='page')
+          td
+            {{$index+1}}
+          td
+            {{ designation.name }}
+          td
+            {{ designation.description }}
+          td
+            a(href='/designations/{{designation._id}}') Edit
+            button(ng-click='remove(designation._id)') Remove
+    dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)',ng-if='IsVisible')
     
-    ul
-      li(dir-paginate='designation in designations | itemsPerPage: perPage', total-items='designationsCount.count',  current-page='page')
-        p 
-          a(href='/designations/{{designation._id}}') {{ designation.name }}
-          
-          button(ng-click='remove(designation._id)') &times;
-    dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)')
-    a(href='/adashboard') Cancel
-
-    
+     
   span(flex='')

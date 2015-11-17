@@ -17,5 +17,9 @@ angular.module 'etimesheetApp'
     controller: 'DailyLogDetailCtrl'
     resolve:
       currentUser: ['$meteor', ($meteor) ->
-        $meteor.requireUser()
+        $meteor.requireValidUser((user)->
+          if(user.emails[0].address=="admin@etimesheet.com")
+             return true
+           return 'UNAUTHORIZED'
+         )
       ]
