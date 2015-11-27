@@ -1,22 +1,36 @@
 .login(layout='row')
-md-content(layout='row')
+md-content(layout='row', layout-align='center center',style='margin-top:80px;background-color:light-green;color:light-green;')
       span(flex='')
-
-      md-whiteframe(layout='column',name='login' flex='50')
-        div(layout="row", layout-align='space-around center')
-          h3 Welcome To E-Timesheet Management System
-        div(layout='row', layout-align='space-around center')
-          div Login with:
-          md-button Twitter
-          md-button Facebook
-        .md-warn(ng-show='error')
-          small {{ error }}
-        form(layout='column')
-          md-input-container
-            input(type='text', ng-model='credentials.email', placeholder='email', aria-label='email', ng-focus)
-          md-input-container
-            input(type='password', ng-model='credentials.password', placeholder='password', aria-label='password')
-        div(layout='row', layout-align='space-around center')
-          md-button(ng-click='login()') login
-          md-button(ng-href='/employees') Register
+      div(layout='column',layout-wrap)
+        div(layout="row", layout-align='center center')
+          h2 Welcome To E-Timesheet Management System
+        div(layout='row' ,layout-wrap)
+          div(layout="row", layout-align='space-around center',flex='80')
+            md-whiteframe(layout='column',name='login' flex='90')
+              .md-warn(ng-show='error')
+                small {{ error }}
+              form(layout='column')
+                div       
+                  md-input-container
+                    label Email
+                    input(type='text', ng-model='credentials.email', aria-label='email', ng-focus)
+                div
+                  md-input-container
+                    label Password
+                    input(type='password', ng-model='credentials.password', aria-label='password')
+              div(layout='row', layout-align='space-around center')
+                md-button.md-raised.md-primary(ng-click='login()') login
+          div(layout='row', layout-align='space-around center',style="border-left:1px solid;margin-top:20px;",flex='20')
+            md-whiteframe(layout='column',name='register',flex='10')
+                i(class='fa fa-user-plus fa-5x', ng-click='employee()')
+                  md-tooltip(md-direction='right') SignUp For New User
+        div(layout='row',flex='',layout-wrap)
+          div(layout='row' layout-align='space-between center')
+            h4 Login with:
+            md-button
+              i(class='fa fa-facebook-official fa-3x')
+            md-button
+              i(class='fa fa-twitter fa-3x')
+            md-button
+              i(class='fa fa-google-plus-square fa-3x')
       span(flex='')

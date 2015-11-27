@@ -15,7 +15,7 @@
         label Email
         input(ng-model='organization.email', placeholder='Email Address', type='email')
       div(layout='row')
-        input.md-button(type='submit', value='Save')
-        md-button(ng-click='reset()') Reset
-        md-button(ng-href='/organizations') Cancel
+        input.md-button.md-raised.md-primary(type='submit', value='Save')
+        md-button.md-raised.md-primary(ng-click='reset()') Reset
+        md-button.md-raised.md-primary(ng-href='/organizations') Cancel
   span(flex='')

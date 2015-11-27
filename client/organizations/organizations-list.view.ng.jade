@@ -2,7 +2,7 @@
   span(flex='')
   div(layout='column')
     h1(ng-if='IsVisible') Organizations
-    form.md-whiteframe-z1(ng-submit='save()', name='form', novalidate='', layout-padding='', ng-show = 'IsVisible')
+    form.md-whiteframe-z1(ng-submit='save()', name='form', novalidate='', layout-padding='', ng-show = 'IsVisible',flex='50')
       p Add a organization
       md-input-container
         label Name
@@ -15,29 +15,40 @@
       md-input-container
         label Email
         input(ng-model='newOrganization.email', placeholder='Email Address', type='email')
-      input.md-button(type='submit', value='Add')
-      button(ng-click='cancel()') Cancel
+      input.md-button.md-raised.md-primary(type='submit', value='Add')
+    p(ng-if='IsVisible')
+      md-button.md-raised.md-primary(ng-click='cancel()') Cancel
     p(ng-if='!IsVisible')
-      button(ng-click='ShowHide()') Add new Organization
+      md-button.md-raised.md-primary(style="border-radius: 15px;" ,ng-click='ShowHide()') Add new Organization
+        md-tooltip Click to Add a new Organization
     h1(ng-if='!IsVisible') List Of Added Organizations 
     table(padding='1px',border='1px',float='left', ng-if='!IsVisible')
       thead
         tr
           th S.No
-          th
-            a(href='#', ng-click="sortType = 'name'; sortReverse = !sortReverse") Name
+          th(ng-click="sortType = 'name'; sortReverse = !sortReverse")
+            a(href='#',style="color:white;text-decoration:none;") Name
+              i(class='fa fa-sort',style="float:right")
+              md-tooltip(md-direction='top') Click to Sort According to Name
             span(ng-show="sortType == 'name' && !sortReverse")
             span(ng-show="sortType == 'name' && sortReverse")
-          th
-            a(href='#', ng-click="sortType = 'address'; sortReverse = !sortReverse") Address
+
+          th(ng-click="sortType = 'address'; sortReverse = !sortReverse")
+            a(href='#',style="color:white;text-decoration:none;") Address
+              i(class='fa fa-sort',style="float:right")
+              md-tooltip(md-direction='top') Click to Sort According to Address
             span(ng-show="sortType == 'address' && !sortReverse")
             span(ng-show="sortType == 'address' && sortReverse")
-          th
-            a(href='#', ng-click="sortType = 'Phone'; sortReverse = !sortReverse") Contact Number
+          th(ng-click="sortType = 'Phone'; sortReverse = !sortReverse")
+            a(href='#',style="color:white;text-decoration:none;") Contact Number
+              i(class='fa fa-sort',style="float:right;margin-left:13px;")
+              md-tooltip(md-direction='top') Click to Sort According to Contact Number
             span(ng-show="sortType == 'Phone' && !sortReverse")
             span(ng-show="sortType == 'Phone' && sortReverse")
-          th
-            a(href='#', ng-click="sortType = 'email'; sortReverse = !sortReverse") Email Address
+          th(ng-click="sortType = 'email'; sortReverse = !sortReverse")
+            a(href='#',style="color:white;text-decoration:none;") Email Address
+              i(class='fa fa-sort',style="float:right")
+              md-tooltip(md-direction='top') Click to Sort According to Email Address
             span(ng-show="sortType == 'email' && !sortReverse")
             span(ng-show="sortType == 'email' && sortReverse")
           th Operation
@@ -53,9 +64,12 @@
           td
             {{organization.email}}
           td
-            a(href='/organizations/{{organization._id}}') Edit
-            button(ng-click='remove(organization)') Remove
-    dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)')
+            a(href='/organizations/{{organization._id}}')
+              i(class='fa fa-pencil-square-o fa-2x',style="color:rgb(0,150,136);")
+                md-tooltip(md-direction='right') Edit 
+            i(class='fa fa-trash-o fa-2x',style="color:rgb(0,150,136);margin-left:15px;",ng-click='remove(organization)')
+              md-tooltip(md-direction='right') Delete
+    dir-pagination-controls.md-accent(ng-if='!IsVisible',on-page-change='pageChanged(newPageNumber)')
 
     p(ng-if='!IsVisible') Total number of organizations: {{organizationsCount.count}}
      

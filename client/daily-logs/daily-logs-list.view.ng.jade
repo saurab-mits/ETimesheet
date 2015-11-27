@@ -7,15 +7,18 @@
         thead
           tr
             th 
-              a(href='#', ng-click="sortType = 'name'; sortReverse = !sortReverse") Project
+              a(href='#', ng-click="sortType = 'name'; sortReverse = !sortReverse", style="color:white;text-decoration:none;") Project
+                i(class='fa fa-sort',style="float:right")
               span(ng-show="sortType == 'name' && !sortReverse")
               span(ng-show="sortType == 'name' && sortReverse")
             th 
-              a(href='#', ng-click="sortType = 'Timetaken'; sortReverse = !sortReverse") Time Taken
+              a(href='#', ng-click="sortType = 'Timetaken'; sortReverse = !sortReverse", style="color:white;text-decoration:none;") Time Taken
+                i(class='fa fa-sort',style="float:right")
               span(ng-show="sortType == 'Timetaken' && !sortReverse")
               span(ng-show="sortType == 'Timetaken' && sortReverse")
             th
-              a(href='#', ng-click="sortType = 'Description'; sortReverse = !sortReverse") Description
+              a(href='#', ng-click="sortType = 'Description'; sortReverse = !sortReverse", style="color:white;text-decoration:none;") Description
+                i(class='fa fa-sort',style="float:right")
               span(ng-show="sortType == 'Description' && !sortReverse")
               span(ng-show="sortType == 'Description' && sortReverse")
             th Operations
@@ -32,7 +35,7 @@
                 textarea(ng-model='newDailyLog.Description', placeholder='')
                 label Task
             td
-              button(ng-click='addRow()') Add New Row
+              md-button.md-raised.md-primary(ng-click='addRow()') Add New Row
           tr(ng-repeat="time in Times")
             td
               md-select(ng-model='time.pname', placeholder='Project Title')
@@ -50,8 +53,8 @@
                 label Task
               
             td
-              button(ng-click='Times.splice($index, 1)') Remove
+              i(class='fa fa-trash-o fa-2x',style="color:rgb(0,150,136);",ng-click='Times.splice($index, 1)')
 
-      button(ng-click='save()', style='float:right;') Save
+      i(class='fa fa-floppy-o fa-2x',style="color:rgb(0,150,136);float:right;",ng-click='save()')
     
   span(flex='')

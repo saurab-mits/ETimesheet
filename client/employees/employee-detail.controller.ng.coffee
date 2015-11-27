@@ -7,22 +7,24 @@ angular.module 'etimesheetApp'
   $scope.designations = $scope.$meteorCollection () ->
     Designations.find {}, {sort:$scope.getReactively('sort')}
   $scope.$meteorSubscribe('designations')
+  $scope.departments = $scope.$meteorCollection () ->
+    Departments.find {}, {sort:$scope.getReactively('sort')}
+  $scope.$meteorSubscribe('departments')
  
-  #$scope.set=(name)->
-  #  $scope.employee.designation=name
-   # console.log($scope.employee.designation)
+  
   
   $scope.save = () ->
-    
-      $scope.employee.save().then(
-        (numberOfDocs) ->
-          console.log 'save successful, docs affected ', numberOfDocs
-          $mdToast.show($mdToast.simple().content('Data Saved Sucessfully'))
-          $state.go('emplst')
+    console.log($scope.employee.department)
+    $scope.employee.save().then(
+      (numberOfDocs) ->
+        console.log 'save successful, docs affected ', numberOfDocs
+        $mdToast.show($mdToast.simple().content('Data Saved Sucessfully'))
+        $state.go('emplst')
 
-        (error) ->
-          console.log 'save error ', error
-      )
+      (error) ->
+        console.log 'save error ', error
+        $state.go('emplst')
+    )
         
   $scope.reset = () ->
     $scope.employee.reset()

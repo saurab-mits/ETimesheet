@@ -25,20 +25,24 @@ angular.module 'etimesheetApp'
       $scope.employees.save $scope.newEmployee
       $mdToast.show($mdToast.simple().content('User registered Sucessfully'))
       console.log("saved")
-      $scope.newEmployee = undefined
-    Accounts.createUser({email:$scope.email,password:$scope.password,Role:$scope.role}, (error)->
-      if(error)
-        console.log(error)
-      else
-        console.log('success')
-        $scope.verificationState = $scope.user[0].emails[0].verified
-        $scope.emailToVerify = $scope.user[0].emails[0].address
-        if($scope.verificationState==false)
-          Meteor.call('chkEmailVerify',Meteor.userId(),$scope.emailToVerify)
-          $state.go('not-verified',{userId: Meteor.userId()})
+    Accounts.createUser({
+      email:$scope.email
+      password:$scope.password
+      Role:$scope.role
+      }, (error)->
+        if(error)
+          console.log(error)
         else
-          $state.go('udashboard')
-    )
+          console.log('success')
+          $scope.verificationState = $scope.user[0].emails[0].verified
+          $scope.emailToVerify = $scope.user[0].emails[0].address
+          if($scope.verificationState==false)
+            Meteor.call('chkEmailVerify',Meteor.userId(),$scope.emailToVerify)
+            $state.go('not-verified',{userId: Meteor.userId()})
+          else
+            $state.go('udashboard')
+      )
+    $scope.newEmployee = undefined
    
 ]
 

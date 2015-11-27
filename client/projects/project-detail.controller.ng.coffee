@@ -31,16 +31,15 @@ angular.module 'etimesheetApp'
      list.push(emp)
   
   $scope.save = () ->
-    if $scope.form.$valid
-      $scope.project.save().then(
-        (numberOfDocs) ->
-          console.log 'save successful, docs affected ', numberOfDocs
-          $state.go 'projects-list'
-          $mdToast.show($mdToast.simple().content('Project Saved Sucessfully'))
-        (error) ->
-          console.log 'save error ', error
-      )
-        
+    $scope.project.save().then(
+      (numberOfDocs) ->
+        console.log 'save successful, docs affected ', numberOfDocs
+        $state.go 'projects-list'
+        $mdToast.show($mdToast.simple().content('Project Saved Sucessfully'))
+      (error) ->
+        console.log 'save error ', error
+    )
+      
   $scope.reset = () ->
     $scope.project.reset()
     $mdToast.show($mdToast.simple().content('Project Reset Sucessfully'))

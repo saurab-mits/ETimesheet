@@ -9,6 +9,8 @@ angular.module 'etimesheetApp'
 
   $scope.dailyLogs = $scope.$meteorCollection () ->
     DailyLogs.find {}, {sort:$scope.getReactively('sort')}
+  $scope.employees = $scope.$meteorCollection () ->
+    Employees.find {'deleted':'0'}
   $meteor.autorun $scope, () ->
     $scope.$meteorSubscribe('dailyLogs', {
       limit: parseInt($scope.getReactively('perPage'))
@@ -19,12 +21,17 @@ angular.module 'etimesheetApp'
   $scope.projects = $scope.$meteorCollection () ->
     Projects.find {}, {sort:$scope.getReactively('sort')}
   $scope.$meteorSubscribe('projects')
+  $scope.$meteorSubscribe('employees')
   $scope.users = $scope.$meteorCollection () ->
     Meteor.users.find {}
 
   $scope.set=(name)->
     $scope.pname=name
     console.log($scope.pname)
+  $scope.find=(use,project,from,to)->
+    $scope.dailyLogs = $scope.$meteorCollection () ->
+      DailyLogs.find {'pname':project, 'user':use, 'createdDate':{$gt:from, $lt:to}}, {sort:$scope.getReactively('sort')}
+    console.log($scope.dailyLogs)
   
   $scope.save = () ->
     $scope.dailyLog.pname=$scope.pname

@@ -4,30 +4,30 @@
     h1 Admin Dashboard
     br
     br
-    table(padding='1px', float='left')
+    table(padding='1px', float='left',style="", class='table')
       thead
         tr
          th(colspan="2") user Management
         tr
          td
-          md-button.md-raised.md-primary(ng-click='manEmp()') Manage Employees
+          md-button.md-raised.md-primary(class= 'menu', ng-click='manEmp()') Manage Employees
          td
-          md-button.md-raised.md-primary(ng-click='manOrg()') Manage Organization
+          md-button.md-raised.md-primary(class= 'menu', ng-click='manOrg()') Manage Organization
         tr
          th(colspan="2") List Data Management
         tr
          td
-          md-button.md-raised.md-primary(ng-click='manDep()') Manage Departments
+          md-button.md-raised.md-primary(class= 'menu', ng-click='manDep()') Manage Departments
          td
-          md-button.md-raised.md-primary(ng-click='manDes()') Manage Designations
+          md-button.md-raised.md-primary(class= 'menu', ng-click='manDes()') Manage Designations
         tr
          td
-          md-button.md-raised.md-primary(ng-click='viewLeave()') View Leave Request
+          md-button.md-raised.md-primary(class= 'menu',style="margin-left:10px;", ng-click='viewLeave()') View Leave Request
           
          td
-          md-button.md-raised.md-primary(ng-click='viewLog()') View Daily Log
+          md-button.md-raised.md-primary(class= 'menu',style="margin-left:30px;", ng-click='viewLog()') View Daily Log
         tr
-          td
-            a(ng-href="/projects") Add Projects
+          td(colspan="2")
+            md-button.md-raised.md-primary(class= 'menu', ng-click='addProj()', style="margin-left:130px;") Manage Projects
 
   span(flex='')

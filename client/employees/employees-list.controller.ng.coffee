@@ -20,13 +20,12 @@ angular.module ('etimesheetApp')
 
   $meteor.session 'employeesCounter'
   .bind $scope, 'page'
-  $scope.user = $scope.$meteorCollection () ->
-    Meteor.users.find {}
+  
 
     
   $scope.save = () ->
     $scope.newEmployee.deleted='0'
-    $scope.newEmployee.isActive='1'
+    $scope.newEmployee.isActive='0'
     $scope.newEmployee.emailAddress = {
       primary : $scope.email
     }
@@ -38,7 +37,9 @@ angular.module ('etimesheetApp')
     console.log("Home number="+ $scope.newEmployee.personalDetails.Contact.Hnumber)
     $scope.newEmployee = undefined
     console.log("record saved")
-    Accounts.createUser({email:$scope.email,password:$scope.password,Role:$scope.role}, (error)->
+    Meteor.call('create',$scope.email,$scope.password)
+    $state.go('main')
+    ###Accounts.createUser({email:$scope.email,password:$scope.password}, (error)->
       if(error)
         console.log(error)
       else
@@ -50,7 +51,7 @@ angular.module ('etimesheetApp')
           $state.go('not-verified',{userId: Meteor.userId()})
         else
           $state.go('main')
-    )
+    )###
     
       
   $scope.remove = (employee) ->

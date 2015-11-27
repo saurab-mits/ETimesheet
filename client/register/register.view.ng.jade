@@ -36,7 +36,8 @@ md-content(layout='row')
               input(type='password', ng-model='password',placeholder='Passwords', aria-label='password')
             md-input-container
               input(type='password', ng-model='Repassword',placeholder='Retype Password', aria-label='password')
-          input.md-button(type='submit', value='Save')
+          input.md-button.md-raised.md-primary(type='submit', value='Save')
         div(layout='row', layout-align='end center')
-          md-button(ng-href='/login') Login
+          md-button.md-raised.md-primary(ng-href='/login') Member Login
+
       span(flex='')

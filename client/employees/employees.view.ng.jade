@@ -16,7 +16,11 @@
          td {{employee.personalDetails.Contact.Mnumber}}
          td {{employee.emailAddress[0].primary}}
          td 
-          a(ng-href='/{{employee._id}}') Edit
-          button(ng-click='remove(employee._id)') Delete
+          a(ng-href='/{{employee._id}}')
+            i(class='fa fa-pencil-square-o fa-2x')
+                md-tooltip(md-direction='right') Edit
+          md-button.md-raised.md-primary(ng-click='remove(employee._id)', style="background-color:transparent;")
+            i(class='fa fa-trash-o fa-2x',style="color:black")
+                md-tooltip(md-direction='right') Delete
           a(ng-href='/adminreset/{{employee._id}}') Reset Password
   span(flex='')

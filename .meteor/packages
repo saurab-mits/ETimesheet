@@ -28,8 +28,8 @@ mquandalle:bower
 tmeasday:publish-counts
 angularutils:pagination
 accounts-password
-accounts-ui
 accounts-twitter
 accounts-facebook
 accounts-google
 email
+fortawesome:fontawesome

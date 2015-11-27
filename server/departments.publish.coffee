@@ -1,9 +1,15 @@
 'use strict'
 
 Meteor.publish 'departments', (options, searchString) ->
-  where =
+  if !searchString
+    searchString = ''
+  Counts.publish this, 'numberOfDepartments', Departments.find(
     'name':
-      '$regex': '.*' + (searchString or '') + '.*'
-      '$options': 'i'
-  Counts.publish this, 'numberOfDepartments', Departments.find(where), noReady: true
-  Departments.find where, options
+      '$regex': '.*' + searchString or '' + '.*'
+      '$options':'i'
+  ), noReady: true
+  Departments.find {
+    'name':
+      '$regex': '.*' + searchString or '' + '.*'
+      '$options':'i'  
+  }, options

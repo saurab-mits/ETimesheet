@@ -1,18 +1,22 @@
 md-toolbar.toolbar(layout='row', layout-align='start center', layout-padding='')
   .navbar-left(layout='row', layout-align='center center')
-    h3 E-Timesheet ...
-    div(ng-controller='toolCtrl', ng-if='currentUser.emails[0].address')
+    div(ng-controller='toolCtrl', ng-if='currentUser.emails[0].address',style="margin-left:25px;")
       div(ng-if='user(currentUser.emails[0].address)')
-        a(href='/udashboard') Home
+        a(href='/udashboard',style="color:white;text-decoration:none;")
+          h3 E-Timesheet 
+          md-tooltip(md-direction='right') Home
       div(ng-if='!user(currentUser.emails[0].address)')
-        a(href='/adashboard') Home
+        a(href='/adashboard',style="color:white;text-decoration:none;")
+          h3 E-Timesheet 
+          md-tooltip(md-direction='right') Home
     
     
     
 
   span(flex='')
-  .navbar-right 
+  .navbar-right(style="margin-right:30px;") 
     {{currentUser.emails[0].address}}
     div(ng-if='currentUser.emails[0].address')
-      a(href='/logout') Logout
+      a(href='/logout',style="color:white;text-decoration:none;") Logout
+        md-tooltip(md-direction='left') click to sign out from current user
  

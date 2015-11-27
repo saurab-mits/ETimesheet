@@ -18,7 +18,11 @@ angular.module 'etimesheetApp'
     DailyLogs.find {}, {sort:$scope.getReactively('sort')}
   $scope.projects = $scope.$meteorCollection () ->
     Projects.find {'member':$rootScope.currentUser.emails[0].address}, {sort:$scope.getReactively('sort')}
+  $scope.employee= $scope.$meteorCollection () ->
+    Employees.find {'emailAddress.primary':$scope.currentUser.emails[0].address}, {sort:$scope.getReactively('sort')}
+
   $meteor.autorun $scope, () ->
+    $scope.$meteorSubscribe('employees')
     $scope.$meteorSubscribe('dailyLogs', {
       limit: parseInt($scope.getReactively('perPage'))
       skip: parseInt(($scope.getReactively('page') - 1) * $scope.getReactively('perPage'))
@@ -30,14 +34,12 @@ angular.module 'etimesheetApp'
   $meteor.session 'dailyLogsCounter'
   .bind $scope, 'page'
 
-  console.log($rootScope.currentUser._id)
-  console.log($rootScope.currentUser.emails[0].address)
-
+  
   $scope.set=(name)->
     $scope.pname=name
     console.log($scope.pname)
   $scope.addRow=()->
-    $scope.Times.push({pname:$scope.newDailyLog.name,Timetaken:$scope.newDailyLog.Timetaken,description:$scope.newDailyLog.Description,user:$rootScope.currentUser._id,createdDate:new Date()})
+    $scope.Times.push({pname:$scope.newDailyLog.name,Timetaken:$scope.newDailyLog.Timetaken,description:$scope.newDailyLog.Description,user:$scope.employee[0].name,createdDate:new Date()})
     $scope.newDailyLog = ''
     
   

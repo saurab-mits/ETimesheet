@@ -9,21 +9,24 @@
         input(ng-model='newDesignation.name', placeholder='Name')
       Label Description
       textarea(ng-model='newDesignation.description',placeholder='Description')
-      input.md-button(type='submit', value='Add')
-      button(ng-click='cancel()') Cancel
+      input.md-button.md-raised.md-primary(type='submit', value='Add')
+    p(ng-if='!IsVisible')
+      md-button.md-raised.md-primary(ng-click='cancel()') Cancel
     p(ng-if='IsVisible')
-      button(ng-click='ShowHide()') Add Designation
+      md-button.md-raised.md-primary(style="border-radius: 15px;",ng-click='ShowHide()') Add Designation
     h2(ng-if='IsVisible') List of the Added Designation are
     table(padding='1px',border='1px',float='left', ng-if='IsVisible')
       thead
         tr
           th S.No
-          th
-            a(href='#', ng-click="sortType = 'name'; sortReverse = !sortReverse") Designation
+          th(ng-click="sortType = 'name'; sortReverse = !sortReverse")
+            a(href='#',style="color:white;text-decoration:none;") Designation
+              i(class='fa fa-sort',style="float:right;margin-left:13px;")
             span(ng-show="sortType == 'name' && !sortReverse")
             span(ng-show="sortType == 'name' && sortReverse")
-          th
-            a(href='#', ng-click="sortType = 'description'; sortReverse = !sortReverse") Description
+          th(ng-click="sortType = 'description'; sortReverse = !sortReverse")
+            a(href='#',style="color:white;text-decoration:none;") Description
+              i(class='fa fa-sort',style="float:right")
             span(ng-show="sortType == 'description' && !sortReverse")
             span(ng-show="sortType == 'description' && sortReverse")
           th Operation
@@ -35,8 +38,11 @@
           td
             {{ designation.description }}
           td
-            a(href='/designations/{{designation._id}}') Edit
-            button(ng-click='remove(designation._id)') Remove
+            a(href='/designations/{{designation._id}}',style="text-decoration:none;")
+              i(class='fa fa-pencil-square-o fa-2x',style="color:rgb(0,150,136);")
+                md-tooltip(md-direction='right') Edit
+            i(class='fa fa-trash-o fa-2x',style="color:rgb(0,150,136);margin-left:13px;",ng-click='remove(designation._id);')
+              md-tooltip(md-direction='right') Delete
     dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)',ng-if='IsVisible')
     
      

@@ -14,9 +14,33 @@ angular.module 'etimesheetApp'
       sort: $scope.getReactively('sort')
     }, $scope.getReactively('search')).then () ->
       $scope.employeesCount = $scope.$meteorObject Counts, 'numberOfEmployees', false
-
   $meteor.session 'employeesCounter'
   .bind $scope, 'page'
+
+  $scope.authinticate=(userId,useradd)->
+    $scope.emp=$scope.$meteorCollection () ->
+      Employees.find {'_id':userId}
+    console.log($scope.emp[0].isActive)
+    if($scope.emp[0].isActive==1)
+      $mdToast.show($mdToast.simple().content('This user is already verified'))
+    else
+      Meteor.call('update11',userId)
+      Meteor.call('update12',useradd)
+     # Meteor.call('update13',useradd)
+      $mdToast.show($mdToast.simple().content('user verified Sucessfully'))
+
+  $scope.unauthinticate=(userId,useradd)->
+    $scope.emp=$scope.$meteorCollection () ->
+      Employees.find {'_id':userId}
+    console.log($scope.emp[0].isActive)
+    if($scope.emp[0].isActive==0)
+      $mdToast.show($mdToast.simple().content('This user is deactivated already'))
+    else
+      Meteor.call('update112',userId)
+      Meteor.call('update123',useradd)
+
+
+
 
  
     

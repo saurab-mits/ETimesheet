@@ -1,6 +1,17 @@
 Meteor.startup ->
   if Meteor.users.find().count() == 0
-    users =[
+    Accounts.createUser({
+      email: 'admin@etimesheet.com'
+      password: 'admin123'
+      stopActivationLink : true
+    })
+    Accounts.createUser({
+      email: 'saurab@makeitsimple.info'
+      password: 'saurab123'
+      stopActivationLink : true
+    })
+    
+   ### users =[
       {
         "_id" : "DbLfBj8TBLzhCDjf2",
         "createdAt" : new Date(),
@@ -35,7 +46,8 @@ Meteor.startup ->
       }
     ]
     users.forEach (user) ->
-      Meteor.users.insert user
+      Meteor.users.insert user###
+    
         
       
   

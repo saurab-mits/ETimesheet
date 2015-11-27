@@ -25,9 +25,15 @@ angular.module 'etimesheetApp'
     templateUrl: 'client/udashboard/udashboard.view.html'
     controller: 'udashboardctrl'
     resolve:
-      currentUser: ['$meteor', ($meteor) ->
-        $meteor.requireUser()
+      currentUser: ['$meteor','$state', ($meteor,$state) ->
+        $meteor.requireValidUser((user)->
+          if(user.emails[0].verified==true && user.emails[0].isActive==1)
+             return true
+          else
+            $state.go('not-verified')
+          )
       ]
+
   .state 'adashboard',
     url: '/adashboard'
     templateUrl: 'client/adashboard/adashboard.view.html'

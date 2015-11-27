@@ -3,7 +3,7 @@
 angular.module 'etimesheetApp'
 .controller 'DepartmentsListCtrl', ($scope, $meteor, $mdToast) ->
   $scope.page = 1
-  $scope.perPage = 5
+  $scope.perPage = 10
   $scope.IsVisible=false
   $scope.sort = name : 1
   $scope.orderProperty = '1'

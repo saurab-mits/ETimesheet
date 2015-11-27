@@ -1,37 +1,52 @@
 .leaveRequest-detail(layout='row')
   span(flex='')
   div(layout='column')
+    div(layout='row',style="border-style: solid;border-width:1px;width:50%;") 
+        md-select(ng-model='user1', placeholder='user',style="margin-right:30px;width:50%;")
+         md-option(ng-value='employee.name', ng-repeat='employee in employees') {{ employee.name }}
+        md-button.md-raised.md-primary(ng-click='find(user1)',style="height:13px:float:right;") Submit
     h1 List of the leaveRequest
     table(padding='1px',border='1px',float='left')
       thead
         tr
          th S.no
-         th
-          a(href='#', ng-click="sortType = 'askDate'; sortReverse = !sortReverse") Requested Date
+         th(ng-click="sortType = 'askDate'; sortReverse = !sortReverse")
+          a(href='#',style="color:white;text-decoration:none;") Requested Date
+            i(class='fa fa-sort',style="float:right")
           span(ng-show="sortType == 'askDate' && !sortReverse")
           span(ng-show="sortType == 'askDate' && sortReverse")
-         th 
-          a(href='#', ng-click="sortType = 'user'; sortReverse = !sortReverse") Requested By
+         th(ng-click="sortType = 'user'; sortReverse = !sortReverse")
+          a(href='#', style="color:white;text-decoration:none;") Requested By
+            i(class='fa fa-sort',style="float:right")
           span(ng-show="sortType == 'user' && !sortReverse")
           span(ng-show="sortType == 'user' && sortReverse")
-         th 
-          a(href='#', ng-click="sortType = 'reason'; sortReverse = !sortReverse") Reason
+         th( ng-click="sortType = 'reason'; sortReverse = !sortReverse") 
+          a(href='#',style="color:white;text-decoration:none;") Reason
+            i(class='fa fa-sort',style="float:right")
           span(ng-show="sortType == 'reason' && !sortReverse")
           span(ng-show="sortType == 'reason' && sortReverse")
-         th 
-          a(href='#', ng-click="sortType = 'startDate'; sortReverse = !sortReverse") Start Date
+         th(ng-click="sortType = 'startDate'; sortReverse = !sortReverse") 
+          a(href='#', style="color:white;text-decoration:none;") Start Date
+            i(class='fa fa-sort',style="float:right")
           span(ng-show="sortType == 'startDate' && !sortReverse")
           span(ng-show="sortType == 'startDate' && sortReverse")
-         th
-          a(href='#', ng-click="sortType = 'endDate'; sortReverse = !sortReverse")  End Date
+         th(ng-click="sortType = 'endDate'; sortReverse = !sortReverse")
+          a(href='#', style="color:white;text-decoration:none;")  End Date
+            i(class='fa fa-sort',style="float:right")
           span(ng-show="sortType == 'endDate' && !sortReverse")
           span(ng-show="sortType == 'endDate' && sortReverse")
+         th Option
         tr(dir-paginate='leaveRequest in leaveRequests | itemsPerPage: perPage | orderBy:sortType:sortReverse ', total-items='leaveRequestsCount.count', current-page='page')
          td {{$index+1}}
          td {{leaveRequest.askDate| date:'fullDate' }} 
          td {{leaveRequest.user}} 
          td {{leaveRequest.reason }}
          td {{leaveRequest.startDate| date:'fullDate' }}
-         td {{leaveRequest.endDate| date:'fullDate' }}
+         td {{leaveRequest.endDate| date:'fullDate' }} 
+         td
+          md-button.md-raised.md-primary(ng-click='check(leaveRequest._id)',ng-show='!leaveRequest.approvedBy') Approve
+            md-tooltip(md-direction='right') click to Approve Request
+          md-button.md-raised.md-primary(ng-click='',ng-show='leaveRequest.approvedBy') Approved
+            md-tooltip(md-direction='right') Request is approved already Nothing to do with it
     dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)')
   span(flex='')

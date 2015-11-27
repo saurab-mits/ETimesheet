@@ -1,33 +1,56 @@
 .dailyLog-detail(layout='row')
   span(flex='')
   div(layout='column')
+    form
+      legend
+       h3 Provide information to view data accordingly
+        div(layout='row',style="border-style: solid;border-width:1px;") 
+          md-select(ng-model='user1', placeholder='user',style="margin-right:30px;")
+           md-option(ng-value='employee.name', ng-repeat='employee in employees') {{ employee.name }}
+          md-select(ng-model='project1', placeholder='project', style="margin-right:30px;")
+            md-option(ng-value='project.name', ng-repeat='project in projects') {{ project.name }}
+          label Date
+            md-datepicker(ng-model='from', md-placeholder='From')
+            md-datepicker(ng-model='to', md-placeholder='To')
+          md-button.md-raised.md-primary(ng-click='find(user1,project1,from,to)',style="height:13px") Submit
+    
     h1 List of the dailyLog
     table(padding='1px',border='1px',float='left')
       thead
         tr
          th S.no
-         th
-          a(href='#', ng-click="sortType = 'createdDate'; sortReverse = !sortReverse") Log Date
+         th(ng-click="sortType = 'createdDate'; sortReverse = !sortReverse")
+          a(href='#',style="color:white;text-decoration:none;") Log Date
+            i(class='fa fa-sort',style="float:right")
+            md-tooltip(md-direction='top') Click to Sort According to Log Date
           span(ng-show="sortType == 'createdDate' && !sortReverse")
           span(ng-show="sortType == 'createdDate' && sortReverse")
-         th 
-          a(href='#', ng-click="sortType = 'user'; sortReverse = !sortReverse") Record By
+         th( ng-click="sortType = 'user'; sortReverse = !sortReverse")
+          a(href='#', style="color:white;text-decoration:none;") Record By
+            i(class='fa fa-sort',style="float:right")
+            md-tooltip(md-direction='top') Click to Sort According to User
           span(ng-show="sortType == 'user' && !sortReverse")
           span(ng-show="sortType == 'user' && sortReverse")
-         th 
-          a(href='#', ng-click="sortType = 'pname'; sortReverse = !sortReverse") Project name
+         th(ng-click="sortType = 'pname'; sortReverse = !sortReverse")
+          a(href='#',style="color:white;text-decoration:none;") Project name
+            i(class='fa fa-sort',style="float:right;margin-left:13px;")
+            md-tooltip(md-direction='top') Click to Sort According to Project name
           span(ng-show="sortType == 'pname' && !sortReverse")
           span(ng-show="sortType == 'pname' && sortReverse")
-         th 
-          a(href='#', ng-click="sortType = 'description'; sortReverse = !sortReverse")  Description
+         th(ng-click="sortType = 'description'; sortReverse = !sortReverse")
+          a(href='#', style="color:white;text-decoration:none;")  Description
+            i(class='fa fa-sort',style="float:right")
+            md-tooltip(md-direction='top') Click to Sort According to Description
           span(ng-show="sortType == 'description' && !sortReverse")
           span(ng-show="sortType == 'description' && sortReverse")
-         th
-          a(href='#', ng-click="sortType = 'Timetaken'; sortReverse = !sortReverse")  Time Taken
+         th(ng-click="sortType = 'Timetaken'; sortReverse = !sortReverse")
+          a(href='#', style="color:white;text-decoration:none;")  Time Taken
+            i(class='fa fa-sort',style="float:right;margin-left:13px;")
+            md-tooltip(md-direction='right') Click to Sort According to Time Taken
           span(ng-show="sortType == 'Timetaken' && !sortReverse")
           span(ng-show="sortType == 'Timetaken' && sortReverse")
 
-        tr(dir-paginate='dailyLog in dailyLogs | orderBy:sortType:sortReverse |  itemsPerPage: perPage',total-items='dailyLogsCount.count', current-page='page')
+        tr(dir-paginate='dailyLog in dailyLogs | orderBy:sortType:sortReverse |filter:logfilter|  itemsPerPage: perPage',total-items='dailyLogsCount.count', current-page='page')
          td {{ $index+1 }}
          td {{ dailyLog.createdDate | date:'fullDate' }} 
          td {{ dailyLog.user }} 

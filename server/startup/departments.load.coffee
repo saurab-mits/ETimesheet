@@ -3,9 +3,15 @@ Meteor.startup ->
     departments = [
       {
         'name': 'department 1'
+        'description':'department 1'
+        'deleted' :'0'
+        'isActive': '1'
       }
       {
         'name': 'department 2'
+        'description':'department 2'
+        'deleted' :'0'
+        'isActive': '1'
       }
     ]
     departments.forEach (department) ->

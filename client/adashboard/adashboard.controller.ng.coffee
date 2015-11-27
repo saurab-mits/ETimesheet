@@ -19,3 +19,5 @@ angular.module 'etimesheetApp'
     $state.go('dailyLog-detail')
   $scope.viewLeave=()->
     $state.go('leaveRequest-detail')
+  $scope.addProj=()->
+    $state.go('projects-list')

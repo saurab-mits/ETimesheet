@@ -2,11 +2,14 @@ Meteor.startup ->
   if Organizations.find().count() == 0
     organizations = [
       {
-        'name': 'organization 1'
+        'name': 'MakeItSimple'
+        'address':'Pulchowk,kathmandu'
+        'Contact':{
+          'Phone':'016634669'
+        }
+        'email':'mis@makeitsimple.info'
       }
-      {
-        'name': 'organization 2'
-      }
+      
     ]
     organizations.forEach (organization) ->
       Organizations.insert organization

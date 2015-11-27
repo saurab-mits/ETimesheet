@@ -2,7 +2,7 @@
   span(flex='')
   div(layout='column')
     h1(ng-if='IsVisible') Projects
-    form.md-whiteframe-z1(ng-submit='save()', id='form',ng-show = 'IsVisible', novalidate='', layout-padding='')
+    form.md-whiteframe-z1(id='form',ng-show = 'IsVisible', novalidate='', layout-padding='')
       md-input-container
         label Project Name
         input(ng-model='newProject.name', placeholder='Name of The Project')
@@ -25,21 +25,23 @@
       md-select(ng-model='newProject.parent', placeholder='Select Parent Project if any')
        md-option(ng-value='project._id', ng-repeat='project in projects') {{ project.name }}
 
-      input.md-button(type='submit', value='Add')
-      button(ng-click='cancel()') Cancel
+      md-button.md-raised.md-primary(ng-click='save()') Add
+      md-button.md-raised.md-primary(ng-click='cancel()') Cancel
     p(ng-if='!IsVisible')
-      button(ng-click='ShowHide()') Add Project
+      md-button.md-raised.md-primary(style="border-radius: 15px;", ng-click='ShowHide()') Add Project
     h2(ng-if='!IsVisible') List of the Added Project are
     table(padding='1px',border='1px',float='left', ng-if='!IsVisible')
       thead
         tr
           th S.No
-          th
-            a(href='#', ng-click="sortType = 'name'; sortReverse = !sortReverse") Project
+          th(ng-click="sortType = 'name'; sortReverse = !sortReverse")
+            a(href='#', style="color:white;text-decoration:none;") Project
+              i(class='fa fa-sort',style="float:right")
             span(ng-show="sortType == 'name' && !sortReverse")
             span(ng-show="sortType == 'name' && sortReverse")
-          th
-            a(href='#', ng-click="sortType = 'description'; sortReverse = !sortReverse") Description
+          th(ng-click="sortType = 'description'; sortReverse = !sortReverse")
+            a(href='#', style="color:white;text-decoration:none;") Description
+              i(class='fa fa-sort',style="float:right")
             span(ng-show="sortType == 'description' && !sortReverse")
             span(ng-show="sortType == 'description' && sortReverse")
           th Operation
@@ -51,8 +53,9 @@
           td
             {{ project.description }}
           td
-            a(href='/projects/{{project._id}}') Edit
-            button(ng-click='remove(project._id)') Remove
+            a(href='/projects/{{project._id}}', style="text-decoration:none;")
+              i(class='fa fa-pencil-square-o fa-2x',style="color:rgb(0,150,136);")
+            i(class='fa fa-trash-o fa-2x',style="color:rgb(0,150,136);margin-left:13px;",ng-click='remove(project._id)')
     dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)', ng-if='!IsVisible')
     p(ng-if='!IsVisible') Total number of projects: {{projectsCount.count}}
      

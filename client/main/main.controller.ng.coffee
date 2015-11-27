@@ -9,6 +9,8 @@ angular.module('etimesheetApp').controller 'LoginCtrl', ['$scope', '$meteor','$s
   $scope.adminPassword="admin123"
   $scope.user = $scope.$meteorCollection () ->
     Meteor.users.find {}
+  $scope.employee=()->
+    $state.go('employees-list')
   
   $scope.login =() ->
     $meteor.loginWithPassword($scope.credentials.email, $scope.credentials.password).then (->
@@ -20,12 +22,18 @@ angular.module('etimesheetApp').controller 'LoginCtrl', ['$scope', '$meteor','$s
       if($scope.credentials.email==$scope.adminEmail && $scope.credentials.password==$scope.adminPassword)
         $state.go 'adashboard'
       else
+        $scope.active=$scope.user[0].emails[0].isActive
+        console.log($scope.user[0].emails[0].isActive)
         $scope.verificationState = $scope.user[0].emails[0].verified
         if($scope.verificationState==false)
           Meteor.call('chkEmailVerify',Meteor.userId(),$scope.emailToVerify)
           $state.go('not-verified',{userId: Meteor.userId()})
+        else if($scope.active==0)
+          $state.go('not-verified',{userId: Meteor.userId()})
         else
-          $state.go 'udashboard'
+          $state.go('udashboard')
+
+          
     ), (err) ->
       $scope.error = 'Login error - ' + err
 ]
