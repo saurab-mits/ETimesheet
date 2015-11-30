@@ -2,15 +2,9 @@
   span(flex='')
   div(layout='column')
     h1 User Dashboard
-    br
-    br
-  div(layout='row', layout-align='space-around center')
-            br
-            div Name
-            br
-            md-button.md-raised.md-primary(ng-click='addTime()')
-            | Add Timesheet
-
-            md-button.md-raised.md-primary(ng-click='addLeave()')
-            | Add Leave
+    div(layout='row')
+      div(style="border-radius:50%;padding:30px;width:190px;background:#009688;height:70px;", ng-click='addTime()')
+        h3(style="color:white;") Add Timesheet
+      div(style="border-radius:50%;padding:30px;width:190px;background:#009688;height:70px;", ng-click='addLeave()')
+        h3(style="color:white;") Add Leave
   span(flex='')

@@ -10,24 +10,35 @@
          th(colspan="2") user Management
         tr
          td
-          md-button.md-raised.md-primary(class= 'menu', ng-click='manEmp()') Manage Employees
+          div(style="border-radius: 50%;padding: 30px;background:#009688;height:80px;", ng-click='manEmp()')
+            div(layout='column')
+              i(class='fa fa-users fa-3x',style="margin-left:65px;")
+              h3(style="color:white;margin-left:10px;") Manage Employees
          td
-          md-button.md-raised.md-primary(class= 'menu', ng-click='manOrg()') Manage Organization
+          div(style="border-radius:50%;padding:30px;width:190px;background:#009688;height:90px;", ng-click='manOrg()')
+            div(layout='column')
+              i(class='fa fa-sitemap fa-3x',style="margin-left:65px;")
+              h3(style="color:white;") Manage Organization
         tr
          th(colspan="2") List Data Management
         tr
          td
-          md-button.md-raised.md-primary(class= 'menu', ng-click='manDep()') Manage Departments
+          div(style="border-radius: 50%;padding: 30px;background:#009688;height:50px;", ng-click='manDep()')
+            h3(style="color:white;") Manage Departments
          td
-          md-button.md-raised.md-primary(class= 'menu', ng-click='manDes()') Manage Designations
+          div(style="border-radius: 50%;padding: 30px;background:#009688;height:50px;", ng-click='manDes()')
+            h3(style="color:white;") Manage Designations
         tr
          td
-          md-button.md-raised.md-primary(class= 'menu',style="margin-left:10px;", ng-click='viewLeave()') View Leave Request
+          div(style="border-radius: 50%;padding: 30px;background:#009688;height:50px;", ng-click='viewLeave()')
+            h3(style="color:white;") View Leave Request
           
          td
-          md-button.md-raised.md-primary(class= 'menu',style="margin-left:30px;", ng-click='viewLog()') View Daily Log
+          div(style="border-radius: 50%;padding: 30px;background:#009688;height:50px;", ng-click='viewLog()')
+            h3(style="color:white;") View Daily Log
         tr
           td(colspan="2")
-            md-button.md-raised.md-primary(class= 'menu', ng-click='addProj()', style="margin-left:130px;") Manage Projects
+            div(style="border-radius: 50%;padding: 30px;background:#009688;height:50px;width:150px;margin-left:130px;", ng-click='addProj()')
+              h3(style="color:white;") Manage Projects
 
   span(flex='')
